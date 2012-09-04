@@ -1,0 +1,5 @@
+#/bin/sh
+echo g++ \`root-config --cflags --libs\` plotOccMC_segm_demonstr.cxx -o plotOccMC_segm_demonstr
+g++ -O2 `root-config --cflags --libs` plotOccMC_segm_demonstr.cxx -o plotOccMC_segm_demonstr
+echo g++ \`root-config --cflags --libs\` plotOccMC_segm_side_demonstr.cxx -o plotOccMC_segm_side_demonstr
+g++ -O2 `root-config --cflags --libs` plotOccMC_segm_side_demonstr.cxx -o plotOccMC_segm_side_demonstr

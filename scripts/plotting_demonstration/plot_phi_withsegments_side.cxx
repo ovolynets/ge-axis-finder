@@ -1,0 +1,102 @@
+int plot_phi_withsegments_side()
+{
+  gROOT->SetStyle("Plain");
+  gStyle->SetOptStat(0);
+  TCanvas *c1 = new TCanvas("c1","c1",5,5,1024,800);
+  Int_t source_angle = 40;
+  Int_t axis_angle = 0;
+  // Reading the tree
+  TChain *ch1 = new TChain("occu");
+//  ch1->Add(Form("/mnt/scratch/volynets/Work/mage/Th228/10_3cm_side/AfterDrift/Occ_%ddeg_Th228_side.root",angle));
+  ch1->Add(Form("/mnt/scratch/volynets/Work/mage/Th228/side_GII/p1/AfterDrift/Occ_%ddeg_Th228_side_GII.root",axis_angle-source_angle));
+
+  // Branch addresses etc.
+  Int_t nhits;
+  ch1->SetBranchAddress("nhits",&nhits);
+  Float_t hit_x[1000];
+  ch1->SetBranchAddress("hit_x",hit_x);
+  Float_t hit_y[1000];
+  ch1->SetBranchAddress("hit_y",hit_y);
+  Float_t hit_z[1000];
+  ch1->SetBranchAddress("hit_z",hit_z);
+  Float_t hit_E[1000];
+  ch1->SetBranchAddress("hit_E",hit_E);
+
+  Double_t phi[1000];
+  ch1->SetBranchAddress("phi",phi);
+  Double_t r[1000];
+  ch1->SetBranchAddress("r",r);
+  Double_t z[1000];
+  ch1->SetBranchAddress("z",z);
+
+  Int_t nentries = ch1->GetEntries();
+  cout<<"Found "<<nentries<<" entries. Processing..."<<endl;
+
+  TH1F *h = new TH1F("h1","Occupancy vs #phi; #phi [^{o}];Events [1/^{o}]",360,0,360);
+
+  // Creating bin array for the second, segmented, histogram
+  Double_t phi_t = 0;
+  TH1F *h_segm = new TH1F("h_segm","h_segm",6,0,360);
+
+  // Segment energy
+  Double_t segEn[6];
+
+  // Looping over events
+  for (int iEvt = 0; iEvt < nentries; iEvt++)
+//  for (int iEvt = 0; iEvt < 10000; iEvt++)
+  {
+    ch1->GetEntry(iEvt);
+    if (iEvt%100000==0) cout<<iEvt<<" events processes."<<endl;
+    for (int j=0; j<nhits; j++)
+    {
+       phi_t = phi[j]+source_angle;
+       while (phi_t>360) phi_t-=360;
+       h->Fill(phi_t);
+       h_segm->Fill(phi_t);
+    }
+  }
+
+//  cout<<h_segm->GetBinContent(1)<<"  "<<h_segm->GetBinContent(7)<<endl;
+  h->GetYaxis()->SetRangeUser(0, h->GetMaximum()*1.2);
+  h->GetYaxis()->SetTitleOffset(1.2);
+  h->GetYaxis()->SetLabelSize(0.03);
+  h->GetXaxis()->SetLabelSize(0.03);
+  h->Draw();
+
+  h_segm->SetLineWidth(3);
+  h_segm->SetLineColor(2);
+  cout<<h->Integral("width")<<"  "<<h_segm->Integral("width")<<"  "<<h_segm->Integral("width")/h->Integral("width")<<endl;
+  cout<<h->GetSum()<<"  "<<h_segm->GetSum()<<endl;
+  h_segm->Scale(h->Integral("width")/(h_segm->Integral("width")));
+  h_segm->Draw("same");
+
+  c1->Update();
+
+  TLine *lines_l[6];
+  TLine *lines_r[6];
+  Double_t y = 0; // Bincontent at coordinate phi
+  for (int i=1; i<6; i++)
+  {
+    phi_t = i*60;
+
+    y = h_segm->GetBinContent(h_segm->FindBin(phi_t));
+    lines_r[i] = new TLine(phi_t,0,phi_t,y);
+    lines_r[i]->SetLineStyle(9);
+    lines_r[i]->SetLineColor(2);
+    lines_r[i]->SetLineWidth(3);
+    lines_r[i]->Draw();
+
+  }
+
+  TLegend *leg = new TLegend(0.5,0.8,0.89,0.89);
+  leg->SetFillColor(0);
+  leg->SetLineColor(0);
+  leg->AddEntry(h,"Simulated occupancy","l");
+  leg->AddEntry(h_segm,"Rebinned sim. occupancy","l");
+  leg->AddEntry(lines_r[1],"Segmentation boundaries","l");
+
+  leg->Draw("same");
+
+  c1->SaveAs(Form("Side_Occ_phi_demonstr_%d.eps",angle));
+  return 1;
+}

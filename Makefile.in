@@ -1,0 +1,49 @@
+CXX = @CXX@
+
+# Root variables
+CFLAGS   += @CFLAGS@ @ROOTCFLAGS@
+LDFLAGS  += -L@ROOTLIBDIR@ @ROOTLIBS@ -lProof
+
+SOURCES := $(shell ls -1 *.cxx)
+SOURCES += $(shell ls -1 src/*.cxx)
+EXECUTABLE=main
+# DICTNAME=MyParameters
+# DICTSRC=proof/$(DICTNAME)_DICT.C
+# DICTOBJ=proof/$(DICTNAME)_DICT.o
+
+DICTNAMES=$(shell ls -1 proof/My*.h)
+DICTSRC=proof/pars_DICT.C
+DICTOBJ=proof/pars_DICT.o
+
+INCLUDE = -I. -Iinc/ -Iproof/
+
+# build object files 
+#OBJECTS = $(patsubst %.cxx,%.o,$(SOURCE_FILES))
+OBJECTS = $(SOURCES:.cxx=.o)
+
+.PHONY: doc
+.SUFFIXES: .cxx .o
+
+Tasks: all
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS) $(DICTSRC) $(DICTOBJ)
+#	make -C proof
+	$(CXX) -Wall -g $(LDFLAGS) $(OBJECTS) $(DICTOBJ) $(LIBS) -o $@
+
+.cxx.o:
+	$(CXX) -Wall $(CFLAGS) $(INCLUDE) -o $@ -c $<
+.C.o:
+	$(CXX) -Wall $(CFLAGS) $(INCLUDE) -o $@ -c $<
+
+$(DICTSRC):
+	rootcint $(DICTSRC) -c -p $(CFLAGS) $(INCLUDE) $(DICTNAMES) proof/LinkDef.h
+
+doc:
+	@echo Generating doxygen documentation. Note: the old documentation will be deleted.
+	@if [ -d ./doc/doxygen/html ]; then echo Deleting the old documentation...; rm -rf ./doc/doxygen/html; echo ... done; fi
+	@doxygen ./doc/AxisFindercfg
+
+
+clean:
+	rm -f *.o main *~ src/*.o src/*~ inc/*~  proof/*.d proof/*.so proof/*DICT*
