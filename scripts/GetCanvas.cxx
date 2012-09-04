@@ -1,3 +1,9 @@
+/**
+ *  Read the canvas with the simulated and measured occupancy distributions for the given axis angle.
+ *  The script was designed to compare the measured and simulated occupancies for the best match.
+ */
+
+
 #include "/home/pclg-23/volynets/.root/macros/logon.C"
 // #include "/home/alex/.root/macros/logon.C"
 

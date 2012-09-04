@@ -1,3 +1,11 @@
+/**
+ *  Read the occupancy histograms in MC and measurements and calculate the test statistic value,
+ *  either chi2 or epsilon.
+ *  The plotting is made automatically for all cases (top, side) and all lines (0.58, 1.17, 1.33, 2.61),
+ *  and (if needed) for all systematic studies.
+ *  The fit ranges are set by hands from visual identification of the minimal values of test statistic.
+ */
+
 #include "TH1F.h"
 #include "TStyle.h"
 #include "TROOT.h"

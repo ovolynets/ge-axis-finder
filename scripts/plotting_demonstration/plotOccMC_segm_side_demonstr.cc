@@ -1,3 +1,9 @@
+/**
+ *  Calculate the occupancy histogram for a given axis angle for the side case.
+ *  Read the event information from the corresponding file and prepare
+ *  a canvas with the occupancy distribution, and write it into the .root file
+ */
+
 #include <iostream>
 #include <math.h>
 
@@ -38,12 +44,11 @@ int main(int argc, char**argv)
     case 0: sLayer = TString("bottom"); break;
     case 1: sLayer = TString("middle"); break;
     case 2: sLayer = TString("top"); break;
-    default: cout<<"Bad!!"<<endl;
+    default: cout<<"Bad!!"<<endl; break;
   };
 
 
   TChain *ch1 = new TChain("wfTree");
-//   ch1->Add("/remote/pclg-23/volynets/Work/mage/Th228/AfterDrift/Th228_top_DriftBU.root");
 
   Float_t source_angle = 155;
 //  Float_t axis_angle = 30+90;
@@ -175,6 +180,7 @@ int main(int argc, char**argv)
 
 Int_t GetSegID(const Double_t SegAngle/*deg*/, const Double_t z/*cm*/, const Double_t angle/*deg*/)
 {
+  // See comments in the main TAxisFinder-based program
   const Double_t H=7.0;
   const Int_t Pi = 180.;
   Double_t tPhi;

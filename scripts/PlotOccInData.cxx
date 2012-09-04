@@ -1,3 +1,7 @@
+/**
+ *  Plot the measured occupancy for a given case, source and energy peak
+ */
+
 #include "/home/pclg-23/volynets/.root/macros/logon.C"
 
 void PlotOccInData()

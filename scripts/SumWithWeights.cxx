@@ -1,3 +1,10 @@
+/**
+ *  Read the results of the fit to the test statistic from the text file
+ *  (produced by CalcFitChi2)
+ *  and combine them for the final result of the axis orientation for all layers.
+ */
+
+
 #include "TROOT.h"
 
 #include <fstream>

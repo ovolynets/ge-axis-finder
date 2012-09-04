@@ -1,3 +1,11 @@
+/**
+ *  Plot a pair of simulated occupancies for different input axis angle
+ *  to compare the effect of rotating the axis orientation.
+ *  The canvas for each angle were prepared beforehands in separate .root files
+ *  by plotOccMC_segm_demonstr / plotOccMC_segm_side_demonstr for top/side cases,
+ *  respectively
+ */
+
 #include "/home/pclg-23/volynets/.root/macros/logon.C"
 
 int CombineAngles()

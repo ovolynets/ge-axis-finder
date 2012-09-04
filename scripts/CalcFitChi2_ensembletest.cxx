@@ -1,3 +1,16 @@
+/**
+ *  The program to perform the ensemble test. The idea repeats the regular CalcFitChi2,
+ *  but the content of each bin gets modified by a random value according to the Gaussian
+ *  distribution with sigma=sqrt(bin content) of the corresponding bin.
+ *  The results of the ensemble test (reconstructed axis orientation)
+ *  are recorded in a text file.
+ *
+ *  As in CalcFitChi2:
+ *  The plotting is made automatically for all cases (top, side) and all lines (0.58, 1.17, 1.33, 2.61),
+ *  and (if needed) for all systematic studies.
+ *  The fit ranges are set by hands from visual identification of the minimal values of test statistic.
+ */
+
 #include "TH1F.h"
 #include "TStyle.h"
 #include "TROOT.h"

@@ -1,3 +1,10 @@
+/**
+ *  Read and plot the occupancy distribution for the corresponding layer
+ *  for systematic uncertainties connected to the displacement of the source
+ *  by 5 mm along phi=45/90 degree. The nominal and two "displaced" histograms
+ *  are superimposed for comparison.
+ */
+
 // #include "/home/alex/.root/macros/logon.C"
 #include "/home/pclg-23/volynets/.root/macros/logon.C"
 

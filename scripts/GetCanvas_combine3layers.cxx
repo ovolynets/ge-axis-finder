@@ -1,3 +1,9 @@
+/**
+ *  Read and plot the occupancy distribution for three layers superimposed.
+ *  Two pads are created on the canvas, one for the nominal Siegfried-II-like detector
+ *  and the one with lower impurity levels.
+ */
+
 #include "/home/pclg-23/volynets/.root/macros/logon.C"
 // #include "/home/alex/.root/macros/logon.C"
 

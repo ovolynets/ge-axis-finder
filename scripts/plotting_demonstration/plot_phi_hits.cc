@@ -1,3 +1,7 @@
+/**
+ *  Plot the finalpoints distribution of the hits after drift for either case
+ */
+
 #include "TROOT.h"
 #include "TChain.h"
 #include "TCanvas.h"
@@ -19,6 +23,7 @@ int main()
 //int plot_phi_hits()
 {
   TString ccase("Side");
+//  TString ccase("Top");
 
   SetStyles();
 
@@ -84,7 +89,6 @@ int main()
     if (iEvt%100000==0) cout<<iEvt<<" events processes."<<endl;
     for (int j=0; j<nhits; j++)
     {
-//       cout<<hit_z[j]<<endl;
        if (fabs(hit_z[j])>11.666) continue;
        v.Set(hit_x[j], hit_y[j]);
 //       phi_t = v.Phi()*180/Pi;
@@ -92,7 +96,6 @@ int main()
        while (phi_t>360) phi_t-=360;
        while (phi_t<0) phi_t+=360;
        hHits->Fill(phi_t);
-//       cout<<v.Phi()*180/Pi<<endl;
 
 
        phi_t = phi[j];

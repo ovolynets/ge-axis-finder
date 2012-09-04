@@ -1,0 +1,4 @@
+The results are extracted using CalcFitChi2.cxx program that produces a set of graphs, fit and write the results into the text file.
+In the end, the result for all layers are combined by SumWithWights programs.
+
+The rest scripts are for plotting occupancy distribution and demonstration

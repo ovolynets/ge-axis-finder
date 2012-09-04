@@ -1,3 +1,9 @@
+/**
+ *  Plot the measured energy spectra:
+ *  1. (BG+source) and (source-only)
+ *  2. Fit components: Gauss+sigmoid
+ */
+
 #include "TF1.h"
 #include "TStyle.h"
 #include "TMath.h"

@@ -1,3 +1,9 @@
+/**
+ *  Read the ensemble results from the text file and fit the Gaussian-like
+ *  distribution of the resulting axis orientations
+ */
+
+
 #include "/home/pclg-23/volynets/.root/macros/logon.C"
 
 void ensemble_read()
