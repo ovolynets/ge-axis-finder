@@ -1,3 +1,13 @@
+/*
+ * main.cxx
+ *
+ *  The executable for the determination of the axes orientation.
+ *
+ *     Created on: long time ago
+ *  Last modified: September 04, 2012
+ *         Author: O. Volynets
+ */
+
 #include "TAxisFinder.h"
 #include <iostream>
 #include "stdlib.h"
