@@ -1,0 +1,6 @@
+The program AxisFinder was designed to find the crystallographic axes in a segmented detector using segment occupancy and transverse anisotropy in the crystal.
+For the algorithm and more details, see
+Eur. Phys. J. C  72  (2012) 1950
+(link http://www.springerlink.com/content/yw37xk4263734358/)
+
+The GIT version contains source code only, in ~volynets/Work/someplace  you will find all the plots that were produced using the program to match the script and the output

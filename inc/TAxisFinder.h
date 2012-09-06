@@ -59,9 +59,6 @@ public:
   //! Write the histograms, close the output file
   void Finalize();
 
-//
-//  //! Plot the chi2 distribution and write it into the output file
-//  void PlotChi2();
   //! Read ini file with the analysis parameters
   void ReadIniFile(const char* filename);
 
