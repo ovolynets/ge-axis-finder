@@ -3,3 +3,5 @@ Makefile
 *.o
 doc/doxygen
 *DICT*
+config.log
+config.status
